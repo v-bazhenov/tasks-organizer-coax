@@ -1,0 +1,1 @@
+web: gunicorn tasks_organizer.wsgi --log-file -
