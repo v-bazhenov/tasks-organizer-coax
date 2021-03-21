@@ -33,12 +33,12 @@
     </div>
 </div>
 {% if task.datecompleted is None %}
-<form style='display: none;' method="POST" action="{% url 'completetask' task.id %}">
+<form style='display: none;' method="POST" action="{% url 'tasks:completetask' task.id %}">
     {% csrf_token %}
     <button id="complete" type="submit">Complete</button>
 </form>
 {% endif %}
-<form style='display: none;' method="POST" action="{% url 'deletetask' task.id %}">
+<form style='display: none;' method="POST" action="{% url 'tasks:deletetask' task.id %}">
     {% csrf_token %}
     <button id="delete" type="submit">Delete</button>
 </form>
