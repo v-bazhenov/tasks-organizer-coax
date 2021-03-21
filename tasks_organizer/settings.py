@@ -31,7 +31,7 @@ SECRET_KEY = '$xb@z(t8)z)epab6dq+a@-m@7co76vxqm$mb25vzx6kdle6ojx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tasks-organizer-coax.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'organizer',
+    'tasks',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -92,7 +93,14 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'organizer.User'
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+AUTH_USER_MODEL = 'users.User'
 
 
 # Password validation
@@ -142,4 +150,4 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-LOGIN_URL = '/login'
+LOGIN_URL = '/users/login'

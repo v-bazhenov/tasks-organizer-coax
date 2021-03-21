@@ -26,13 +26,13 @@
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ current }}">
-                        <a class="nav-link" href="{% url 'currenttasks' %}">Current</a>
+                        <a class="nav-link" href="{% url 'tasks:currenttasks' %}">Current</a>
                     </li>
                     <li class="nav-item {{ completed }}">
-                        <a class="nav-link" href="{% url 'completedtasks' %}">Completed</a>
+                        <a class="nav-link" href="{% url 'tasks:completedtasks' %}">Completed</a>
                     </li>
                     <li class="nav-item {{ create }}">
-                        <a class="nav-link" href="{% url 'createtask' %}">Create</a>
+                        <a class="nav-link" href="{% url 'tasks:createtask' %}">Create</a>
                     </li>
                 </ul>
                 {% endif %}
@@ -40,17 +40,17 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Logout</a>
-                        <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
+                        <form style='display: none;' method="POST" action="{% url 'users:logoutuser' %}">
                             {% csrf_token %}
                             <button id="signOutBtn" type="submit">Logout</button>
                         </form>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signupuser' %}">Sign Up</a>
+                        <a class="nav-link" href="{% url 'users:signupuser' %}">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'loginuser' %}">Login</a>
+                        <a class="nav-link" href="{% url 'users:loginuser' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>

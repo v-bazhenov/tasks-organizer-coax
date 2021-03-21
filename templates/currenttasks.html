@@ -14,14 +14,14 @@
         {% if tasks %}
         <div class="list-group">
             {% for task in tasks %}
-            <a href="{% url 'viewtask' task.id %}" class="list-group-item list-group-item-action{% if task.important %} list-group-item-danger{% endif %}"><b>{{ task.title }}</b>{% if task.memo %} - {{ task.memo|truncatechars:30 }}{% endif %}</a>
+            <a href="{% url 'tasks:viewtask' task.id %}" class="list-group-item list-group-item-action{% if task.important %} list-group-item-danger{% endif %}"><b>{{ task.title }}</b>{% if task.memo %} - {{ task.memo|truncatechars:30 }}{% endif %}</a>
             {% endfor %}
         </div>
         {% else %}
         <div class="text-center">
             <h2>Looks like you don't have any tasks! Nice work.</h2>
             <br>
-            <a role="button" class="btn btn-primary" href="{% url 'createtask' %}">New Task</a>
+            <a role="button" class="btn btn-primary" href="{% url 'tasks:createtask' %}">New Task</a>
         </div>
         {% endif %}
     </div>
