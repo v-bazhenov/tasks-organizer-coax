@@ -40,17 +40,17 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Logout</a>
-                        <form style='display: none;' method="POST" action="{% url 'users:logoutuser' %}">
+                        <form style='display: none;' method="POST" action="{% url 'authentication:logoutuser' %}">
                             {% csrf_token %}
                             <button id="signOutBtn" type="submit">Logout</button>
                         </form>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:signupuser' %}">Sign Up</a>
+                        <a class="nav-link" href="{% url 'authentication:signupuser' %}">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:loginuser' %}">Login</a>
+                        <a class="nav-link" href="{% url 'authentication:loginuser' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>

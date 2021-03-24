@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks',
-    'users'
+    'authentication'
 ]
 
 MIDDLEWARE = [
@@ -93,7 +93,7 @@ DATABASES = {
 }
 
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'authentication.User'
 
 
 # Password validation
@@ -143,4 +143,4 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-LOGIN_URL = '/users/login'
+LOGIN_URL = '/authentication/login'

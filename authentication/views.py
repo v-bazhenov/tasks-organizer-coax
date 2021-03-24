@@ -5,12 +5,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 
-from users.forms import UserRegisterForm
+from authentication.forms import UserRegisterForm
 
 
 class SignUpView(CreateView):
     template_name = 'signupuser.html'
-    success_url = reverse_lazy('users:loginuser')
+    success_url = reverse_lazy('authentication:loginuser')
     form_class = UserRegisterForm
 
 

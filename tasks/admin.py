@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import Task
+from tasks.models import Task
 
 
 class TasksAdmin(admin.ModelAdmin):
-    readonly_fields = ('created',)
+    readonly_fields = ('created_at',)
 
 
 admin.site.register(Task, TasksAdmin)
