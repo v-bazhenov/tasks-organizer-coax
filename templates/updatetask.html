@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <h2>New Task</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form enctype="multipart/form-data" action="" method="post"> {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-success" onclick="$('#complete').click()">Complete</button>
+                <button type="button" class="btn btn-danger" onclick="$('#delete').click()">Delete</button>
+            </form>
+        </div>
+    </div>
+    {% if task.date_completed_at is None %}
+        <form style='display: none;' method="POST" action="{% url 'tasks:completetask' task.id %}">
+            {% csrf_token %}
+            <button id="complete" type="submit">Complete</button>
+        </form>
+    {% endif %}
+    <form style='display: none;' method="POST" action="{% url 'tasks:deletetask' task.id %}">
+        {% csrf_token %}
+        <button id="delete" type="submit">Delete</button>
+    </form>
+{% endblock %}

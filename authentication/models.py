@@ -22,13 +22,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False,
                                    help_text=_('Designates whether this user can access this admin site.'),
                                    verbose_name=_('is staff'))
-    is_active = models.BooleanField(default=False,
+    is_active = models.BooleanField(default=True,
                                     help_text=_(
                                         'Designates whether this user should be treated as active. '
                                         'Unselect this instead of deleting accounts.'),
                                     verbose_name=_('is active')
     )
-    is_restoring_password = models.BooleanField(default=False,
+    is_restoring_password = models.BooleanField(default=True,
                                                 help_text=_(
                                                     'Designates that this user should confirm email after password reset'),
                                                 verbose_name=_('restoring_password'))
@@ -53,4 +53,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = 'authentication'
         verbose_name = _('user')
-        verbose_name_plural = _('authentication')
+        verbose_name_plural = _('users')

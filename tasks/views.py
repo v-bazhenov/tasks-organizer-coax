@@ -1,7 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic.edit import CreateView, DeleteView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
@@ -11,11 +14,12 @@ from tasks.forms import TaskForm
 from tasks.models import Task
 
 
-class TaskCreateView(LoginRequiredMixin, CreateView):
+class TaskCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'createtask.html'
     success_url = reverse_lazy('tasks:currenttasks')
+    success_message = 'The task has been successfully created!'
 
     def form_valid(self, form):
         newtask = form.save(commit=False)
@@ -25,14 +29,14 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
 
 class TasksDetailView(LoginRequiredMixin, ListView):
-    queryset = Task.objects.filter(date_completed__isnull=True)
+    queryset = Task.objects.filter(date_completed_at__isnull=True).order_by('-created_at')
     context_object_name = 'tasks'
     template_name = 'currenttasks.html'
     paginate_by = 5
 
 
 class CompletedTasksView(LoginRequiredMixin, ListView):
-    queryset = Task.objects.filter(date_completed__isnull=False).order_by('-date_completed')
+    queryset = Task.objects.filter(date_completed_at__isnull=False).order_by('-date_completed_at')
     context_object_name = 'tasks'
     template_name = 'completedtasks.html'
     paginate_by = 5
@@ -43,23 +47,30 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'task'
     template_name = 'viewtask.html'
 
-    def post(self, request, pk, *args, **kwargs):
-        task = get_object_or_404(Task, pk=pk, user=request.user)
-        form = TaskForm(request.POST, instance=task)
-        form.save()
-        return redirect('tasks:currenttasks')
+
+class TaskUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'updatetask.html'
+    success_url = reverse_lazy('tasks:currenttasks')
+    success_message = 'The task has been successfully edited!'
 
 
 class DeleteTaskView(LoginRequiredMixin, DeleteView):
     login_url = '/authentication/login/'
     model = Task
     success_url = reverse_lazy('tasks:currenttasks')
+    success_message = 'The task has been successfully deleted!'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(DeleteTaskView, self).delete(request, *args, **kwargs)
 
 
 @login_required
 def completetask(request, pk):
     task = get_object_or_404(Task, pk=pk, user=request.user)
     if request.method == 'POST':
-        task.date_completed = timezone.now()
+        task.date_completed_at = timezone.now()
         task.save()
         return redirect('tasks:currenttasks')

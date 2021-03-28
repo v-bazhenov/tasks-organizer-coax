@@ -7,7 +7,7 @@ class Task(models.Model):
     memo = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    date_completed = models.DateTimeField(null=True, blank=True)
+    date_completed_at = models.DateTimeField(null=True, blank=True)
     important = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

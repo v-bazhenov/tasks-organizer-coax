@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row justify-content-center mt-5" style="padding: 100pt;">
+        <div class="col-md-8">
+            <div class="text-center">
+                <h2>Thanks for using Task Organizer.</h2>
+                <h2>Have a nice day!</h2>
+                <a href="{% url 'authentication:loginuser' %}">Log in again</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
