@@ -15,7 +15,7 @@ class SignUpView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.save()
-        send_email.delay()
+        send_email.delay(form.instance.email, form.instance.username)
         return super().form_valid(form)
 
 

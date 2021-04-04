@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, UserManager
+from django.core.validators import MaxLengthValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,10 +16,8 @@ class CustomAccountManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150,
-                                unique=True)
+    username = models.CharField(max_length=150, unique=True, validators=[MaxLengthValidator])
     email = models.EmailField(verbose_name=_('email address'), max_length=255, unique=True)
-    avatar = models.ImageField(upload_to='images/', null=True, blank=True, max_length=255)
     is_staff = models.BooleanField(default=False,
                                    help_text=_('Designates whether this user can access this admin site.'),
                                    verbose_name=_('is staff'))

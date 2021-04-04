@@ -1,0 +1,12 @@
+[
+  {
+    "model": "accounts.Profile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "name": "JonDoe",
+      "phone": 1234567,
+      "profession": "Coder"
+    }
+  }
+]

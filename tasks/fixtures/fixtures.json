@@ -1,0 +1,11 @@
+[
+  {
+    "model": "tasks.Task",
+    "pk": 1,
+    "fields": {
+      "title": "My first task",
+      "memo": "Using Task Organizer is intuitive",
+      "user": 1,
+    }
+  }
+]

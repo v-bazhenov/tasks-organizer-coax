@@ -15,7 +15,7 @@
             {% if task.image %}
                 <div class="form-group">
                     <label for="image"></label>
-                    <img src="{{ task.image.url }}" alt="" width='600px'>
+                    <img src="{{ task.image.url }}" alt="" width='400px'>
                 </div>
             {% else %}
             {% endif %}
@@ -23,10 +23,12 @@
                 <label for="title">Title: </label>
                 <p><strong>{{ task.title }}</strong></p>
             </div>
+            {% if task.memo %}
             <div class="form-group">
                 <label for="memo">Memo: </label>
                 <p><strong>{{ task.memo }}</strong></p>
             </div>
+            {% endif %}
             <div class="form-group">
                 <label class="form-check-label" for="important">Important</label>
                 {% if task.important %}<p><strong>Yes</strong></p>
@@ -34,6 +36,12 @@
                     <p><strong>No</strong></p>
                 {% endif %}
             </div>
+            {% if task.reminder %}
+            <div class="form-group">
+                <label for="reminder">Reminder: </label>
+                <p><strong>{{ task.reminder }}</strong></p>
+            </div>
+            {% endif %}
             <button type="button" class="btn btn-success" onclick="$('#edit').click()">Edit</button>
             <button type="button" class="btn btn-primary" onclick="$('#back').click()">Back</button>
         </div>

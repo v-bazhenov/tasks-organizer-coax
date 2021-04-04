@@ -12,6 +12,7 @@ from django.utils import timezone
 
 from tasks.forms import TaskForm
 from tasks.models import Task
+from tasks.tasks import email_reminder
 
 
 class TaskCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -25,6 +26,12 @@ class TaskCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         newtask = form.save(commit=False)
         newtask.user = self.request.user
         newtask.save()
+        remind_at = form.instance.reminder
+        if remind_at is not None:
+            email = self.request.user.email
+            task_name = form.instance.title
+            task_memo = form.instance.memo
+            email_reminder.apply_async((email, task_name, task_memo), eta=remind_at)
         return super(TaskCreateView, self).form_valid(form)
 
 
