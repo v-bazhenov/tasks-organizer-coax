@@ -39,7 +39,7 @@
             {% if task.reminder %}
             <div class="form-group">
                 <label for="reminder">Reminder: </label>
-                <p><strong>{{ task.reminder }}</strong></p>
+                <p><strong>{{ task.remind_at }}</strong></p>
             </div>
             {% endif %}
             <button type="button" class="btn btn-success" onclick="$('#edit').click()">Edit</button>

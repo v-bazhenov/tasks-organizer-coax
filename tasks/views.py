@@ -26,7 +26,7 @@ class TaskCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         newtask = form.save(commit=False)
         newtask.user = self.request.user
         newtask.save()
-        remind_at = form.instance.reminder
+        remind_at = form.instance.remind_at
         if remind_at is not None:
             email = self.request.user.email
             task_name = form.instance.title
@@ -57,10 +57,10 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 
 class TaskUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Task
-    form_class = TaskForm
     template_name = 'updatetask.html'
     success_url = reverse_lazy('tasks:currenttasks')
     success_message = 'The task has been successfully edited!'
+    fields = ('title', 'memo', 'image', 'important')
 
 
 class DeleteTaskView(LoginRequiredMixin, DeleteView):

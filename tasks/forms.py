@@ -6,11 +6,11 @@ from tasks.models import Task
 
 class TaskForm(ModelForm):
 
-    reminder = forms.DateTimeField(required=False,
+    remind_at = forms.DateTimeField(required=False,
                                    widget=forms.TextInput(
                                     attrs={'type': 'datetime-local'}
                                    ))
 
     class Meta:
         model = Task
-        fields = ['title', 'memo', 'image', 'important', 'reminder']
+        fields = ['title', 'memo', 'image', 'important', 'remind_at']

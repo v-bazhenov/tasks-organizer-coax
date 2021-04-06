@@ -10,7 +10,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     date_completed_at = models.DateTimeField(null=True, blank=True)
     important = models.BooleanField(default=False)
-    reminder = models.DateTimeField(null=True, blank=True)
+    remind_at = models.DateTimeField(null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
