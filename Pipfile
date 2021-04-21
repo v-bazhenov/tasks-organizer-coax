@@ -18,8 +18,13 @@ Pillow = "8.2.0"
 django-environ = "*"
 django-phonenumber-field = "*"
 phonenumbers = "*"
+django-debug-toolbar = "*"
+django-extensions = "*"
 
 [dev-packages]
+flake8 = "*"
+coverage = "*"
+mixer = "*"
 
 [requires]
 python_version = "3.8"

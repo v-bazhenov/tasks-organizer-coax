@@ -10,14 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import os
 import environ
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'phonenumber_field',
+    'debug_toolbar',
+    'django_extensions',
 
     'accounts',
     'authentication',
@@ -49,9 +54,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -138,9 +144,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-servers = env.str('MEMCACHIER_SERVERS')
-username = env.str('MEMCACHIER_USERNAME')
-password = env.str('MEMCACHIER_PASSWORD')
+SERVERS = env.str('MEMCACHIER_SERVERS')
+USERNAME = env.str('MEMCACHIER_USERNAME')
+PASSWORD = env.str('MEMCACHIER_PASSWORD')
 
 CACHES = {
     'default': {
@@ -152,15 +158,14 @@ CACHES = {
         # disables expiration.
         'TIMEOUT': None,
 
-        'LOCATION': servers,
+        'LOCATION': SERVERS,
 
         'OPTIONS': {
-            'username': username,
-            'password': password,
+            'username': USERNAME,
+            'password': PASSWORD,
         }
     }
 }
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -187,6 +192,11 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_BACKEND = env.str('REDIS_URL')
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 
 # Logging
 DJANGO_LOGFILE_NAME = env.str('DJANGO_LOG_PATH', os.path.join(BASE_DIR, '.data/django/plotus.log'))
@@ -224,7 +234,7 @@ LOGGING = {
             'level': 'DEBUG',
             'formatter': 'verbose',
             'class': 'logging.StreamHandler',
-    }, 
+    },
         },
     'loggers': {
         'celery': {
@@ -236,6 +246,6 @@ LOGGING = {
             'handlers': ['logfile', 'console'],
             'propagate': True,
             'level': env.str('DJANGO_LOG_LEVEL', 'INFO'),
-        }, 
+        },
     },
 }

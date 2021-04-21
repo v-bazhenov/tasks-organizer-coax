@@ -1,0 +1,11 @@
+{% extends "email/base.html" %}
+
+{% csrf_token %}
+{% block main %}
+    
+    <p>Welcome to Task Organizer, {{username}}!</p>
+    <p>We hope this handy web tool will help you to organizer your tasks!</p>
+    <p>Should you have further issue please do not hesitate to contact us</p>
+    <br>
+    Task Organizer Team
+{% endblock main %}

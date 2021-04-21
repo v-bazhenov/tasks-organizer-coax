@@ -4,6 +4,7 @@ from accounts.models import Profile
 
 
 class ProfileForm(ModelForm):
+    """Create profile form"""
 
     class Meta:
         model = Profile

@@ -1,0 +1,16 @@
+{% extends "email/base.html" %}
+
+{% csrf_token %}
+{% block main %}    
+    <p>We would like to kindly remind you that you have a task to be done on Task Organizer.
+    <br>
+    <p>Task name: {{task_name}}</p>
+    {% if task_memo %}
+    <p>Task memo: {{task_memo}}</p>
+    {% endif %}
+    {% if task_is_important%}
+    <p>Please, pay attention that you marked this task as important</p>
+    {% endif %}
+    <br>
+    Task Organizer Team
+{% endblock main %}

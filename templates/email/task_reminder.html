@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% csrf_token %}
+<body>
+    <p>We would like to kindly remind you that you have a task to be done on Task Organizer.
+    <br>
+    <p>Task name: {{task_name}}</p>
+    {% if task_memo %}
+    <p>Task memo: {{task_memo}}</p>
+    {% endif %}
+    {% if task_is_important%}
+    <p>Please, pay attention that you marked this task as important</p>
+    {% endif %}
+    <br>
+    Task Organizer Team
+</body>
+</html>

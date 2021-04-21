@@ -15,7 +15,7 @@
             {% if task.image %}
                 <div class="form-group">
                     <label for="image"></label>
-                    <img src="{{ task.image.url }}" alt="" width='400px'>
+                    <img src="{{ task.image.url }}" alt="">
                 </div>
             {% else %}
             {% endif %}
@@ -30,8 +30,8 @@
             </div>
             {% endif %}
             <div class="form-group">
-                <label class="form-check-label" for="important">Important</label>
-                {% if task.important %}<p><strong>Yes</strong></p>
+                <label class="form-check-label" for="is_important">Important</label>
+                {% if task.is_important %}<p><strong>Yes</strong></p>
                 {% else %}
                     <p><strong>No</strong></p>
                 {% endif %}

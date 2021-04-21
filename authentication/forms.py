@@ -1,10 +1,11 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from authentication.models import User
-
+User = get_user_model()
 
 class UserRegisterForm(UserCreationForm):
+    """Create user registration form"""
     email = forms.EmailField()
 
     class Meta:

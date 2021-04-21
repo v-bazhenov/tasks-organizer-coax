@@ -16,7 +16,7 @@
                     {% for task in tasks %}
                     {% if task.user == request.user %}
                         <a href="{% url 'tasks:viewtask' task.id %}"
-                           class="list-group-item list-group-item-action{% if task.important %} list-group-item-danger{% endif %}"><b>{{ task.title }}</b>
+                           class="list-group-item list-group-item-action{% if task.is_important %} list-group-item-danger{% endif %}"><b>{{ task.title }}</b>
                             {% if task.memo %} - {{ task.memo|truncatechars:30 }}{% endif %}</a>
                     {% endif %}{% endfor %}
                 </div>

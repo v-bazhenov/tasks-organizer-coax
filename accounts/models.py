@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
-from django.db.models.signals import post_save
+
 from phonenumber_field.modelfields import PhoneNumberField
 
 from accounts.utils import validate_max_age
@@ -18,17 +18,10 @@ class Profile(models.Model):
 	profession = models.CharField(max_length=150, blank=True, null=True)
 
 	class Meta:
+		db_table = 'accounts_profile'
 		verbose_name = 'Profile'
 		verbose_name_plural = 'Profiles'
 		app_label = 'accounts'
 
 	def __str__(self):
 		return self.user.username
-
-
-def create_user_profile(sender, instance, created, **kwargs):
-	if created:
-		profile = Profile.objects.create(user=instance)
-
-
-post_save.connect(create_user_profile, sender=User)

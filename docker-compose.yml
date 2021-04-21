@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  # The name of your service (project)
+  api:
+    # We need to build an image first from your current directory
+    build: .
+    # This is the link to your environment variables with sensitive information
+    env_file:
+      - .env
+    # Don't open django's ports. Use Nginx's ones instead
+    # Bind volumes
+    volumes:
+      # Map your static and media data folders to container's ones
+      # NOTE you don't need to map your current directory . to container's working directory
+      - ./assets:/app/assets
+      - ./media:/app/media
+    depends_on:
+      # Postgres service must be started first
+      - postgres
+  postgres:
+    # Use postgres image
+    image: postgres:latest
+    # Restart it always
+    restart: always
+    # Env vars file link
+    env_file:
+      - .env
+    volumes:
+      # Map directory in which postgres service will store the data
+      - ./.data/postgres:/var/lib/postgresql/data
+# Serve your production application by Nginx
+  nginx:
+    # Download right Nginx image
+    image: nginx:latest
+    # Restart Nginx always
+    restart: always
+    # Open needed ports for Nginx
+    ports:
+      - 80:80
+    # Path to env vars file
+    env_file:
+      - .env
+    volumes:
+      # Bind Nginx config files to container's one
+      - ./.conf/nginx:/etc/nginx/conf.d
+      # Bind your static and media folders with Nginx container
+      - ./assets:/app/assets
+      - ./media:/app/media
+    # Our app and must be run first
+    depends_on:
+      - api

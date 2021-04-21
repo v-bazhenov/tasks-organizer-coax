@@ -1,3 +1,8 @@
-### Tasks Organizer is an intuitive online task organizer that allows you to keep and organize all your tasks at one place. Now you won't forget about a thing!
+### Task Organizer 
 
-### You can start enjoying it here - https://tasks-organizer-coax.herokuapp.com/
+An intuitive online task organizer that allows you to keep and organize all your tasks at one place.
+
+* Create/edit/delete tasks
+* Personal profile page
+* Email reminders about tasks
+* Track completed tasks

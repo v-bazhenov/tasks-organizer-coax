@@ -1,0 +1,65 @@
+/	django.views.generic.base.TemplateView	home
+/accounts/profile/<int:pk>/	accounts.views.ProfileDetailView	accounts:profile_detail
+/accounts/profile/<int:pk>/update/	accounts.views.ProfileUpdateView	accounts:profile_update
+/admin/	django.contrib.admin.sites.index	admin:index
+/admin/<app_label>/	django.contrib.admin.sites.app_index	admin:app_list
+/admin/accounts/profile/	django.contrib.admin.options.changelist_view	admin:accounts_profile_changelist
+/admin/accounts/profile/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/accounts/profile/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:accounts_profile_change
+/admin/accounts/profile/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:accounts_profile_delete
+/admin/accounts/profile/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:accounts_profile_history
+/admin/accounts/profile/add/	django.contrib.admin.options.add_view	admin:accounts_profile_add
+/admin/accounts/profile/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:accounts_profile_autocomplete
+/admin/auth/group/	django.contrib.admin.options.changelist_view	admin:auth_group_changelist
+/admin/auth/group/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/auth/group/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:auth_group_change
+/admin/auth/group/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:auth_group_delete
+/admin/auth/group/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:auth_group_history
+/admin/auth/group/add/	django.contrib.admin.options.add_view	admin:auth_group_add
+/admin/auth/group/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:auth_group_autocomplete
+/admin/authentication/user/	django.contrib.admin.options.changelist_view	admin:authentication_user_changelist
+/admin/authentication/user/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/authentication/user/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:authentication_user_change
+/admin/authentication/user/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:authentication_user_delete
+/admin/authentication/user/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:authentication_user_history
+/admin/authentication/user/add/	django.contrib.admin.options.add_view	admin:authentication_user_add
+/admin/authentication/user/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:authentication_user_autocomplete
+/admin/jsi18n/	django.contrib.admin.sites.i18n_javascript	admin:jsi18n
+/admin/login/	django.contrib.admin.sites.login	admin:login
+/admin/logout/	django.contrib.admin.sites.logout	admin:logout
+/admin/password_change/	django.contrib.admin.sites.password_change	admin:password_change
+/admin/password_change/done/	django.contrib.admin.sites.password_change_done	admin:password_change_done
+/admin/r/<int:content_type_id>/<path:object_id>/	django.contrib.contenttypes.views.shortcut	admin:view_on_site
+/admin/tasks/task/	django.contrib.admin.options.changelist_view	admin:tasks_task_changelist
+/admin/tasks/task/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/tasks/task/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:tasks_task_change
+/admin/tasks/task/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:tasks_task_delete
+/admin/tasks/task/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:tasks_task_history
+/admin/tasks/task/add/	django.contrib.admin.options.add_view	admin:tasks_task_add
+/admin/tasks/task/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:tasks_task_autocomplete
+/authentication/login/	authentication.views.LoginViewCustom	authentication:loginuser
+/authentication/logout/	django.contrib.auth.views.LogoutView	authentication:logoutuser
+/authentication/signup/	authentication.views.SignUpView	authentication:signupuser
+/debug/history_refresh/	debug_toolbar.panels.history.views.history_refresh	djdt:history_refresh
+/debug/history_sidebar/	debug_toolbar.panels.history.views.history_sidebar	djdt:history_sidebar
+/debug/render_panel/	debug_toolbar.views.render_panel	djdt:render_panel
+/debug/sql_explain/	debug_toolbar.panels.sql.views.sql_explain	djdt:sql_explain
+/debug/sql_profile/	debug_toolbar.panels.sql.views.sql_profile	djdt:sql_profile
+/debug/sql_select/	debug_toolbar.panels.sql.views.sql_select	djdt:sql_select
+/debug/template_source/	debug_toolbar.panels.templates.views.template_source	djdt:template_source
+/images/<path>	django.views.static.serve
+/login/	django.contrib.auth.views.LoginView	login
+/logout/	django.contrib.auth.views.LogoutView	logout
+/password_change/	django.contrib.auth.views.PasswordChangeView	password_change
+/password_change/done/	django.contrib.auth.views.PasswordChangeDoneView	password_change_done
+/password_reset/	django.contrib.auth.views.PasswordResetView	password_reset
+/password_reset/done/	django.contrib.auth.views.PasswordResetDoneView	password_reset_done
+/reset/<uidb64>/<token>/	django.contrib.auth.views.PasswordResetConfirmView	password_reset_confirm
+/reset/done/	django.contrib.auth.views.PasswordResetCompleteView	password_reset_complete
+/tasks/completed/	tasks.views.CompletedTasksView	tasks:completedtasks
+/tasks/create/	tasks.views.TaskCreateView	tasks:createtask
+/tasks/current/	tasks.views.TasksDetailView	tasks:currenttasks
+/tasks/task/<int:pk>	tasks.views.TaskDetailView	tasks:viewtask
+/tasks/task/<int:pk>/complete	tasks.views.completetask	tasks:completetask
+/tasks/task/<int:pk>/delete	tasks.views.DeleteTaskView	tasks:deletetask
+/tasks/task/<int:pk>/update	tasks.views.TaskUpdateView	tasks:updatetask

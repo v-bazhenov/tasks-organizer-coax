@@ -5,8 +5,13 @@ from django.urls import reverse_lazy
 from accounts.models import Profile
 from accounts.forms import ProfileForm
 
+import logging
+
+logger = logging.getLogger('django')
+
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
+    """View existing profile"""
     model = Profile
     fields = ['name', 'avatar', 'age', 'phone', 'profession']
     template_name = 'accounts/profile_detail.html'
@@ -20,6 +25,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    """Update existing profile"""
     model = Profile
     form_class = ProfileForm
     template_name = 'accounts/profile_update.html'

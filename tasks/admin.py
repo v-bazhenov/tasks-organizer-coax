@@ -6,13 +6,13 @@ from tasks.models import Task
 
 
 class TasksAdmin(admin.ModelAdmin):
-    list_display = ['title', 'important', 'date_completed_at']
+    list_display = ['title', 'is_important', 'date_completed_at']
     readonly_fields = ('created_at',)
     ordering = ['-created_at']
     actions = ['mark_important', 'mark_completed', 'mark_not_important', 'mark_not_completed']
 
     def mark_important(self, request, queryset):
-        updated = queryset.update(important=True)
+        updated = queryset.update(is_important=True)
         self.message_user(request, ngettext(
             '%d task was successfully marked as important.',
             '%d tasks were successfully marked as important.',
@@ -21,7 +21,7 @@ class TasksAdmin(admin.ModelAdmin):
     mark_important.short_description = "Mark selected stories as important"
 
     def mark_not_important(self, request, queryset):
-        updated = queryset.update(important=False)
+        updated = queryset.update(is_important=False)
         self.message_user(request, ngettext(
             '%d task was successfully marked as not important.',
             '%d tasks were successfully marked as not important.',

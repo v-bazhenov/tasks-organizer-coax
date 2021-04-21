@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, UserManager
 from django.core.validators import MaxLengthValidator
+from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,7 +17,9 @@ class CustomAccountManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150, unique=True, validators=[MaxLengthValidator])
+    username = models.CharField(max_length=150, unique=True, validators=[MaxLengthValidator,
+                validators.RegexValidator(r'^[\w\.@+\-\s]+$',
+                    _('Enter a valid username. This value may contain only letters, numbers, spaces and @ . + - _ characters.'))])
     email = models.EmailField(verbose_name=_('email address'), max_length=255, unique=True)
     is_staff = models.BooleanField(default=False,
                                    help_text=_('Designates whether this user can access this admin site.'),

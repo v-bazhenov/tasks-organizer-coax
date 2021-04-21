@@ -1,21 +1,13 @@
 from celery import shared_task
-from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+
+import logging
+
+logger = logging.getLogger('celery')
 
 
 @shared_task()
-def send_email(email, user):
-	send_mail(
-		'You have been successfully signed up!',
-		f'Welcome to Task Organizer, {user}!\nWe hope this handy web tool will help you to organizer your tasks!',
-		settings.EMAIL_HOST_USER,
-		[email])
-
-
-@shared_task()
-def email_reminder(email, task_name, task_memo):
-	send_mail(
-		'Do not forget about your task',
-		f"We would like to kindly remind you that you have a task to be done on Task Organizer.\nTask name: {task_name}.\nTask memo: {task_memo}.\nPlease don't forget about it!",
-		settings.EMAIL_HOST_USER,
-		[email])
+def send_html_mail(subject: str, text_content: str, html_content: str, from_email: str, to_mail:str) -> None:
+    msg = EmailMultiAlternatives(subject, text_content, from_email, to_mail)
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
